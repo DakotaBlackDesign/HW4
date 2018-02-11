@@ -3,7 +3,9 @@
 //use the mouse to modulate pitch and wobbles 
 //this is a basic example of using a low frequency oscilator to modulate the frequency of a LowPass filter cutoff.
 
-var freqA = 155.56;
+var freqA = 77.78;
+var oct = 1;
+var netfreq = 77.78;
 var freqB = 10;
 var freqC = 32.7;
 var freqD = 38.89;
@@ -29,7 +31,7 @@ function setup() {
 // oscillators for sound 
   oscA = new p5.Oscillator();
   oscA.setType('triangle');
-  oscA.freq(freqA);
+  oscA.freq(netfreq);
   oscA.amp();
   oscA.disconnect();
   oscA.connect(filter);
@@ -57,7 +59,7 @@ function setup() {
 
 function draw() {
   background(30);
-
+  netfreq = freqA*oct
 // Map varibles to mouse coordinates
   var freqA1 = map(mouseX, 0, width, 1/10, 1); // pitch factor according to mouse up/down 
   var freqB = map(mouseY, height, 0, 1/8, 2); // wobble factor
@@ -65,8 +67,8 @@ function draw() {
   var raz = map(mouseX, 0, width, 0, 5); // resolution range sellector
 	
   oscB.freq(freqB)
-  oscD.freq(freqA*freqA1) //pitch the oscillator frequency up and down acording to factor freqA1
-  oscA.freq(freqA*freqA1)
+  oscD.freq(netfreq*freqA1) //pitch the oscillator frequency up and down acording to factor freqA1
+  oscA.freq(netfreq*freqA1)
 	
   var level = amplitude.getLevel(); //get the amplitude of oscillator oscB
   var resolution = map(level, 0, 1, 0, raz); //remap ocsilator amplitude to a range acceptable for modulating LowPass filter resolution
@@ -106,27 +108,34 @@ function isMouseOverCanvas() { //mouse checker
 function keyPressed() { // change the key 
 	print("got key press for ", key);
   if (key == 'A') {
-    freqA = 130.81
+    freqA = 77.78
 	}
 	if (key == 'S') {
-    freqA = 185.00
+    freqA = 87.31
 	}
 	if (key == 'D') {
-    freqA = 155.56
+    freqA = 92.50
 	}
 	if (key == 'F') {
-    freqA = 220.00
+    freqA = 103.83
 	}
 	if (key == 'G') {
-    freqA = 277.18
+    freqA = 110.00
 	}
 	if (key == 'H') {
-    freqA = 196.00
+    freqA = 123.47
 	}
 	if (key == 'J') {
-    freqA = 329.63
+    freqA = 130.81
 	}
 	if (key == 'K') {
-    freqA = 233.08
+    freqA = 146.83
 	}
+    if (key == 'W') {
+        oct = oct*2
+	}
+    if (key == 'Q') {
+        oct = oct/2
+	}
+    print (netfreq)
 }	
