@@ -2,7 +2,6 @@
 //use keys A,S,D,F,G,H,J,K to change the key
 //use the mouse to modulate pitch and wobbles 
 //this is a basic example of using a low frequency oscilator to modulate the frequency of a LowPass filter cutoff.
-	// 
 
 var freqA = 155.56;
 var freqB = 10;
