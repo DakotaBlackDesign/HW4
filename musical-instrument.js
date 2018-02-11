@@ -1,3 +1,9 @@
+//Wobble Machine 
+//use keys A,S,D,F,G,H,J,K to change the key
+//use the mouse to modulate pitch and wobbles 
+//this is a basic example of using a low frequency oscilator to modulate the frequency of a LowPass filter cutoff.
+	// 
+
 var freqA = 155.56;
 var freqB = 10;
 var freqC = 32.7;
@@ -6,7 +12,7 @@ var fft, filter;
 
 function setup() {
   createCanvas(400,400)
-  fill(255, 40, 255);
+  fill(34, 255, 152);
 
   filter = new p5.LowPass(); // filter for taking out high frequencies
   amplitude = new p5.Amplitude(); // amplitude of the lowfrequency oscillator
