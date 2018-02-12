@@ -18,6 +18,7 @@ function setup() {
 
   filter = new p5.LowPass(); // filter for taking out high frequencies
   amplitude = new p5.Amplitude(); // amplitude of the lowfrequency oscillator
+	reverb = new p5.Reverb();
 	
 // low frequency oscillator for modulation
   oscB = new p5.Oscillator(); 
@@ -31,7 +32,7 @@ function setup() {
 
 // oscillators for sound 
   oscA = new p5.Oscillator();
-  oscA.setType('triangle');
+  oscA.setType('sawtooth');
   oscA.freq(netfreq);
   oscA.amp();
   oscA.disconnect();
@@ -53,7 +54,9 @@ function setup() {
   oscD.disconnect();
   oscD.connect(filter);
   oscD.start();
-
+	
+	reverb.process(filter, 2, 1);
+	
   fft = new p5.FFT(); // spectrum analyzer  
 }
 
@@ -66,7 +69,6 @@ function draw() {
   var freqB = map(mouseY, height, 0, 1/8, 2); // wobble factor
   var wob = map(mouseY, height, 0, 1, 50); // wobble range sellector
   var raz = map(mouseX, 0, width, 0, 5); // resolution range sellector
-	
   oscB.freq(freqB)
   oscD.freq(netfreq*freqA1) //pitch the oscillator frequency up and down acording to factor freqA1
   oscA.freq(netfreq*freqA1)
@@ -93,10 +95,10 @@ function draw() {
 function isMouseOverCanvas() { //mouse checker
   var mX = mouseX, mY = mouseY;
   if (mX >0 && mX < width && mY <width && mY > 0) {
-    oscA.amp(0.1, 0.2); // turn up the Oscillators
-    oscB.amp(0.5, 0.2);
-    oscC.amp(0.1, 0.2);
-    oscD.amp(0.1, 0.2);
+    oscA.amp(0.2, 0.2); // turn up the Oscillators
+    oscB.amp(0.1, 0.2);
+    oscC.amp(0.04, 0.2);
+    oscD.amp(0.04, 0.2);
   } else {
     oscA.amp(0, 0.2); // turn down the Oscillators
     oscB.amp(0, 0.2);
@@ -107,7 +109,7 @@ function isMouseOverCanvas() { //mouse checker
 
 
 function keyPressed() { // change the key 
-	print("got key press for ", key);
+  print("got key press for ", key);
   if (key == 'A') {
     freqA = 77.78
 	}
