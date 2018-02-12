@@ -1,5 +1,6 @@
 //Wobble Machine 
 //use keys A,S,D,F,G,H,J,K to change the key
+//use Q to go down 1 octave and W to go up one octave
 //use the mouse to modulate pitch and wobbles 
 //this is a basic example of using a low frequency oscilator to modulate the frequency of a LowPass filter cutoff.
 
